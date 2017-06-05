@@ -103,7 +103,7 @@ nav li {
 }
 
 nav li:last-child {
-    border-right: none;
+    border-left: none;
 }
 
 nav li a {

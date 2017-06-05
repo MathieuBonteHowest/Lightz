@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -13,8 +12,9 @@
 <main>
     <nav>
         <ul>
-            <li><a href="{{ url_for("logout") }}">Logout</a></li>
-            <li><a {% block controlpanel %}{% endblock %} href="{{ url_for("controlpanel") }}">Control Panel</a></li>
+            <li><a href="{{ url_for("logout") }}">Afmelden</a></li>
+            <li><a {% block controlpanel %}{% endblock %} href="{{ url_for("controlpanel") }}">Bediening lichten</a></li>
+            <li><a {% block overzicht %}{% endblock %} href="{{ url_for("overzicht") }}">Overzicht</a></li>
         </ul>
     </nav>
 </main>

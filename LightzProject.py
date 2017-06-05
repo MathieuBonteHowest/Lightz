@@ -49,6 +49,9 @@ def logout():
 def controlpanel():
     return render_template('controlpanel.html')
 
+@app.route('/overzicht')
+def overzicht():
+    return render_template('overzicht.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
