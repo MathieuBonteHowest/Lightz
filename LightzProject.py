@@ -53,5 +53,9 @@ def controlpanel():
 def overzicht():
     return render_template('overzicht.html')
 
+@app.route('/timer')
+def timer():
+    return render_template('timer.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

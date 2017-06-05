@@ -14,6 +14,7 @@
         <ul>
             <li><a href="{{ url_for("logout") }}">Afmelden</a></li>
             <li><a {% block controlpanel %}{% endblock %} href="{{ url_for("controlpanel") }}">Bediening lichten</a></li>
+            <li><a {% block timer %}{% endblock %} href="{{ url_for("timer") }}">Timer</a></li>
             <li><a {% block overzicht %}{% endblock %} href="{{ url_for("overzicht") }}">Overzicht</a></li>
         </ul>
     </nav>

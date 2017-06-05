@@ -98,38 +98,37 @@ nav ul{
 }
 
 nav li {
-    float: right;
-    border-left: 1px solid #ECF0F1;
+  float: right;
+  border-left: 1px solid #ECF0F1;
 }
 
-nav li:last-child {
-    border-left: none;
+nav li:first-child{
+  margin-right: 52px;
+}
+
+nav li:last-child{
+  border-left: none;
 }
 
 nav li a {
-    display: block;
-    color: #ECF0F1;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  display: block;
+  color: #ECF0F1;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 nav li a:hover {
-    background-color: darkred;
+  background-color: darkred;
 }
 
 .active{
-    background-color: darkred;
+  background-color: darkred;
 }
 
 
 
 /* control page */
-
-button{
-
-}
-
 button:hover {
   opacity: 0.8;
 }
@@ -148,7 +147,7 @@ button:hover {
 .button_screen label{
   float: left;
   padding: 14px 15px;
-  margin: 17px 0px 17px 50px;
+  margin: 17px 0px 17px 52px;
   width: 120px;
   text-transform: uppercase;
   font-weight: bold;
