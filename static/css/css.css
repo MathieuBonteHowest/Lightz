@@ -148,7 +148,7 @@ button:hover {
 .button_screen label{
   float: left;
   padding: 14px 15px;
-  margin: 10px 0px 10px 50px;
+  margin: 17px 0px 17px 50px;
   width: 120px;
   text-transform: uppercase;
   font-weight: bold;
@@ -157,7 +157,7 @@ button:hover {
 .button_screen button{
   float: right;
   padding: 14px 15px;
-  margin: 10px 50px 10px 0px;
+  margin: 17px 50px 17px 0px;
   border: 2px solid #65b37a;
   cursor: pointer;
   width: 120px;
