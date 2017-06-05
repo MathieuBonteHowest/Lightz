@@ -4,7 +4,7 @@ from DbClass import DbClass
 
 app = Flask(__name__)
 
-app.secret_key = "nieuwe key"
+app.secret_key = "MHkGBcKLloYeSp4FDaCsftFTesfDea7w"
 
 def login_required(f):
     @wraps(f)
