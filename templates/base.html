@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{ url_for("static",filename="css/css.css") }}">
+</head>
+
+<body>
+<main>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for("logout") }}">Logout</a></li>
+            <li><a {% block controlpanel %}{% endblock %} href="{{ url_for("controlpanel") }}">Control Panel</a></li>
+        </ul>
+    </nav>
+</main>
+    {% for message in get_flashed_messages() %}
+        {{ message }}
+    {% endfor %}
+{% block body %}
+{% endblock %}
+
+
+
+</body>
+</html>

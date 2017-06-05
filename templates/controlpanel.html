@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Control Panel
+{% endblock %}
+
+{% block controlpanel%}
+    class="active"
+{% endblock %}
+
+{% block body %}
+
+    <div class="button-screen">
+        <form method="post">
+            <ul class="flex">
+                    <ul>
+                        <li><h2>Garage</h2></li>
+                        <li><button name="LightOnGarage">Licht aan</button></li>
+                        <li><button name="LightOffGarage">Licht uit</button></li>
+                    </ul>
+
+                    <ul>
+                        <li><h2>Inkom</h2></li>
+                        <li><button name="LightOnInkom">Licht aan</button></li>
+                        <li><button name="LightOffInkom">Licht uit</button></li>
+                    </ul>
+
+                    <ul>
+                        <li><h2>Badkamer</h2></li>
+                        <li><button name="LightOnBadkamer">Licht aan</button></li>
+                        <li><button name="LightOffBadkamer">Licht uit</button></li>
+                    </ul>
+
+                    <ul>
+                        <li><h2>Wasplaats</h2></li>
+                        <li><button name="LightOnWasplaats">Licht aan</button></li>
+                        <li><button name="LightOffWasplaats">Licht uit</button></li>
+                    </ul>
+
+                    <ul>
+                        <li><h2>Keuken</h2></li>
+                        <li><button name="LightOnKeuken">Licht aan</button></li>
+                        <li><button name="LightOffKeuken">Licht uit</button></li>
+                    </ul>
+
+                    <ul>
+                        <li><h2>Living</h2></li>
+                        <li><button name="LightOnLiving">Licht aan</button></li>
+                        <li><button name="LightOffLiving">Licht uit</button></li>
+                    </ul>
+
+                    <ul>
+                        <li><h2>Living-tafel</h2></li>
+                        <li><button name="LightOnLivingTafel">Licht aan</button></li>
+                        <li><button name="LightOffLivingTafel">Licht uit</button></li>
+                    </ul>
+
+                    <ul>
+                        <li><h2>Terras</h2></li>
+                        <li><button name="LightOnTerras">Licht aan</button></li>
+                        <li><button name="LightOffTerras">Licht uit</button></li>
+                    </ul>
+            </ul>
+        </form>
+	</div>
+
+{% endblock %}
