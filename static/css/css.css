@@ -39,7 +39,7 @@ input[type=text], input[type=password] {
 input[type=submit]{
   border: 2px solid transparent;
   background: #363636;
-  color: #ecf0f1;
+  color: #ECF0F1;
   font-size: 16px;
   line-height: 25px;
   padding: 10px 0;
@@ -99,7 +99,7 @@ nav ul{
 
 nav li {
     float: right;
-    border-left: 1px solid #bbb;
+    border-left: 1px solid #ECF0F1;
 }
 
 nav li:last-child {
@@ -108,7 +108,7 @@ nav li:last-child {
 
 nav li a {
     display: block;
-    color: white;
+    color: #ECF0F1;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -126,63 +126,63 @@ nav li a:hover {
 
 /* control page */
 
-h2{
-  text-align: center;
-  color: #363636;
-  font-size: 1.2em;
-}
-
 button{
-  color: #eee;
-  padding: 14px 20px;
-  margin: 8px auto;
-  border: none;
-  cursor: pointer;
-  width: 120px;
-  text-transform: uppercase;
-  font-weight: bold;
+
 }
 
 button:hover {
   opacity: 0.8;
 }
 
-ul.flex{
-  padding: 0;
-  margin: 0 auto;
-}
-
-ul{
-  text-align: center;
-  padding: 0 20px;
-}
-
-li:nth-child(2) button{
-  background-color: #7BBF6A;
-}
-
-li:nth-child(3) button{
-  background-color: darkred;
-}
-
-li{
-  list-style-type: none;
-}
-
-.container {
-  margin-top: 50px;
-  text-align: center;
-}
-
-.flex{
-  list-style-type: none;
-  display: flex;
+.button_screen{
   flex-direction: row;
   flex-wrap: wrap;
-  width: 50%;
+  display: flex;
+  width: 100%;
   justify-content: center;
   align-items: center;
   align-content: center;
+  margin: 50px auto;
+}
+
+.button_screen label{
+  float: left;
+  padding: 14px 15px;
+  margin: 10px 0px 10px 50px;
+  width: 120px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.button_screen button{
+  float: right;
+  padding: 14px 15px;
+  margin: 10px 50px 10px 0px;
+  border: 2px solid #65b37a;
+  cursor: pointer;
+  width: 120px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: transparent;
+}
+
+.button_screen div:nth-child(even){
+  color: #363636;
+  width: 100%;
+}
+
+.button_screen div:nth-child(odd){
+  background-color: #363636;
+  width: 100%;
+  color: #ECF0F1;
+}
+
+.button_screen div:nth-child(odd) button{
+  color: #ECF0F1;
+}
+
+.button_screen div button:nth-child(2){
+  border: 2px solid #D24D57;
 }
 
 
