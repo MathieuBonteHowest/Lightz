@@ -5,7 +5,7 @@ class DbClass:
         self.__dsn = {
             "host": "localhost",
             "user": "root",
-            "passwd": "mb25081998",
+            "passwd": "x",
             "db": "db_lightz"
         }
 
