@@ -62,7 +62,7 @@ input[type=submit]{
   position: absolute;
   top: 0;
   bottom: 0;
-  left: calc(50% - 165px);
+  left: calc(50% - 140px);
   text-align: center;
 }
 
@@ -77,7 +77,6 @@ input[type=submit]{
   margin:auto;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   top:25%;
-
 }
 
 .login-form {
@@ -104,17 +103,28 @@ input[type=submit]{
   opacity: 0.8;
 }
 
-.flash{
+.flash-container{
   background-color: #fff;
   border: 1px solid #000;
   margin: 0 auto;
   top: 5%;
   padding: 20px;
   border-radius: 5px;
-  width: 330%;
+  width: 330px;
   max-width: 330px;
   text-align: center;
+  position: fixed;
+  left: calc(50% - 165px);
+}
 
+#flash{
+  position: fixed;
+  background-color: rgba(0,0,0,.8);
+  top:0;
+  left:0;
+  height: 100%;
+  width: 100%;
+  display: none;
 }
 
 nav{

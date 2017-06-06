@@ -7,13 +7,7 @@
   <link rel="stylesheet" href="{{ url_for("static",filename="css/css.css") }}">
 </head>
 <body>
-<div class="bg">
-    <div class="flash">
-        {% for message in get_flashed_messages() %}
-          {{ message }}
-        {% endfor %}
-    </div>
-</div>
+<div class="bg"></div>
   <div class="login">
     <div class="login-screen">
       <h1 class="text">Welcome. <span>please login.</span></h1>

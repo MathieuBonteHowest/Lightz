@@ -34,7 +34,7 @@ def login():
             else:
                 session['logged_in'] = True
                 flash('You were just logged in!')
-                return redirect(url_for('controlpanel'))
+                return redirect(url_for('overzicht'))
         else:
             error = "Invalid credentials. Please try again."
     return render_template("login.html", error=error)

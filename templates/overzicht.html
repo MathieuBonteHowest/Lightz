@@ -10,6 +10,12 @@
 
 {% block body %}
 
-
-
+<div id="flash">
+    <div class="flash-container">
+        {% for message in get_flashed_messages() %}
+          {{ message }}
+        {% endfor %}
+        <a id="close-welcome" href="#">take me to te website</a>
+    </div>
+</div>
 {% endblock %}
