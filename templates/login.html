@@ -17,20 +17,20 @@
 
       <form method="post" class="login-form">
         <div class="control-group">
-          <input type="text" placeholder="username" value="{{ request.form.username }}" name="username" onBlur="if(this.value == '') this.value = ''" onFocus="if(this.value == 'username') this.value = ''" required>
+          <input type="text" value="{{ request.form.username }}" name="username" placeholder="username" onBlur="if(this.value == '') this.value = ''" onFocus="if(this.value == 'username') this.value = ''" required>
         </div>
 
         <div class="control-group">
-          <input type="password" placeholder="password" value="{{ request.form.password }}" name="password" onBlur="if(this.value == '') this.value = ''" onFocus="if(this.value == 'password') this.value = ''" required>
+          <input type="password" value="{{ request.form.password }}" name="password" placeholder="password" onBlur="if(this.value == '') this.value = ''" onFocus="if(this.value == 'password') this.value = ''" required>
         </div>
 
         <input type="submit" value="login" name="login">
+
         <a class="login-link" href="#">Lost your password?</a>
 
         {% if error %}
             Error: {{ error }}
         {% endif %}
-
       </form>
     </div>
   </div>

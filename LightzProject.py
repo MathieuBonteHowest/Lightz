@@ -28,13 +28,15 @@ def login():
         db = DbClass()
 
         pwd = db.getUser(request.form['username'])
-
-        if request.form['password'] != pwd[0]:
-            error = "Invalid credentials. Please try again."
+        if pwd:
+            if request.form['password'] != pwd[0]:
+                error = "Invalid credentials. Please try again."
+            else:
+                session['logged_in'] = True
+                flash('You were just logged in!')
+                return redirect(url_for('controlpanel'))
         else:
-            session['logged_in'] = True
-            flash('You were just logged in!')
-            return redirect(url_for('controlpanel'))
+            error = "Invalid credentials. Please try again."
     return render_template("login.html", error=error)
 
 @app.route('/logout')

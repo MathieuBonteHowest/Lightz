@@ -4,8 +4,8 @@ class DbClass:
 
         self.__dsn = {
             "host": "localhost",
-            "user": "root",
-            "passwd": "x",
+            "user": "lightz",
+            "passwd": "lightz",
             "db": "db_lightz"
         }
 
