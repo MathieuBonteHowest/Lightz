@@ -10,15 +10,6 @@ body{
   margin: 0;
   height: 100%;
 }
-.bg{
-  background-image: url("/static/images/pexels-photo-141673.jpeg");
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  -webkit-filter: blur(3px);
-  filter: blur(3px);
-}
 
 /* login page */
 h1 {
@@ -98,6 +89,14 @@ input[type=submit]{
   display: block;
   margin-top: 12px;
 }
+.bg{
+  background-image: url("/static/images/pexels-photo-141673.jpeg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.8;
+}
 
 nav{
   margin: 0 0 20px 0;
@@ -113,15 +112,11 @@ nav ul{
 
 nav li {
   float: right;
-  border-left: 1px solid #ECF0F1;
+  border: none;
 }
 
 nav li:first-child{
   margin-right: 52px;
-}
-
-nav li:last-child{
-  border-left: none;
 }
 
 nav li a {
@@ -133,11 +128,11 @@ nav li a {
 }
 
 nav li a:hover {
-  background-color: darkred;
+  opacity: 0.5;
 }
 
 .active{
-  background-color: darkred;
+  opacity: 0.5;
 }
 
 
@@ -161,7 +156,7 @@ button:hover {
 .button_screen label{
   float: left;
   padding: 14px 15px;
-  margin: 17px 0px 17px 52px;
+  margin: 15px 0px 15px 52px;
   width: 120px;
   text-transform: uppercase;
 }
@@ -169,7 +164,7 @@ button:hover {
 .button_screen button{
   float: right;
   padding: 14px 15px;
-  margin: 17px 50px 17px 0px;
+  margin: 15px 50px 15px 0px;
   border: 2px solid #65b37a;
   cursor: pointer;
   width: 120px;
@@ -191,71 +186,4 @@ button:hover {
 
 
 /* Smartphone
-@media all and (max-width: 980px){
-    h2{
-    font-size: 1.4em;
-  }
 
-  ul{
-    text-align: center;
-    padding: 0 20px;
-    width: 30%;
-  }
-
-  .flex{
-    list-style-type: none;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-  }
-
-  button{
-    background-color: #bcdfd9;
-    color: #eee;
-    padding: 14px 20px;
-    margin: 8px auto;
-    border: none;
-    cursor: pointer;
-    width: 75%;
-    height:60px;
-    text-transform: uppercase;
-    font-weight: bold;
-  }
-
-  input[type=text], input[type=password] {
-    background-color: #3b4148;
-    color: #eee;
-    padding: 12px 20px;
-    margin: 8px auto;
-    border: none;
-    width: 45%;
-    display: block;
-    font-family: 'Open Sans', Arial, sans-serif;
-    border-radius: 3px 3px 3px 3px;
-    text-align: center;
-    font-size: 1em;
-  }
-
-  input[type=submit]{
-    background-color: #bcdfd9;
-    color: #2c3338;
-    padding: 14px 20px;
-    margin: 15px auto;
-    border: none;
-    cursor: pointer;
-    width: 30%;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 1em;
-  }
-  */
-  /* Avatar image
-  img.logo {
-      width: 70%;
-  }
-}
-*/
