@@ -6,7 +6,10 @@
   <link rel="stylesheet" href="{{ url_for("static",filename="css/css.css") }}">
 </head>
 <body>
-
+<div class="bg">
+    {% for message in get_flashed_messages() %}
+      {{ message }}
+    {% endfor %}</div>
   <div class="login">
     <div class="login-screen">
       <h1 class="text">Welcome. <span>please login.</span></h1>
@@ -31,8 +34,6 @@
     </div>
   </div>
 
-  {% for message in get_flashed_messages() %}
-      {{ message }}
-  {% endfor %}
+
 </body>
 </html>
