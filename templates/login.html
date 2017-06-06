@@ -8,9 +8,12 @@
 </head>
 <body>
 <div class="bg">
-    {% for message in get_flashed_messages() %}
-      {{ message }}
-    {% endfor %}</div>
+    <div class="flash">
+        {% for message in get_flashed_messages() %}
+          {{ message }}
+        {% endfor %}
+    </div>
+</div>
   <div class="login">
     <div class="login-screen">
       <h1 class="text">Welcome. <span>please login.</span></h1>
@@ -34,7 +37,5 @@
       </form>
     </div>
   </div>
-
-
 </body>
 </html>

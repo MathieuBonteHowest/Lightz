@@ -57,21 +57,27 @@ input[type=submit]{
 }
 
 .login{
-  margin: 20px auto;
+  margin: auto;
   width: 330px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 165px);
+  text-align: center;
 }
 
 .login-screen{
   background-color: #fff;
-  padding: 20px;
+  position: absolute;
+  padding: 20px 0;
   border-radius: 5px;
   height: 280px;
-  transition: 1s;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto;
+  width: 100%;
+  transition: 1s ease;
+  margin:auto;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
+
 }
 
 .login-form {
@@ -98,8 +104,17 @@ input[type=submit]{
   opacity: 0.8;
 }
 
-#error{
-  margin-top: 20px;
+.flash{
+  background-color: #fff;
+  border: 1px solid #000;
+  margin: 0 auto;
+  top: 5%;
+  padding: 20px;
+  border-radius: 5px;
+  width: 330%;
+  max-width: 330px;
+  text-align: center;
+
 }
 
 nav{
@@ -185,9 +200,5 @@ button:hover {
 .button_screen div button:nth-child(2){
   border: 2px solid #D24D57;
 }
-
-
-
-
 /* Smartphone
 
