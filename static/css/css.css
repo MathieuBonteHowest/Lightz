@@ -107,7 +107,8 @@ input[type=submit]{
   width: 1000px;
   min-width: 1000px;
   height: calc(100% - 51px);
-  margin:auto;
+  margin: 50px auto;
+
 }
 
 #dots{
@@ -126,7 +127,7 @@ input[type=submit]{
 .light1{
   top: 100px;
   left: 250px;
-  background-color: #65b37a;
+  background-color: #D24D57;
 }
 .light2{
   top: 220px;
