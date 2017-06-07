@@ -7,14 +7,14 @@
     </title>
     <link rel="stylesheet" href="{{ url_for("static",filename="css/reset.css") }}">
     <link rel="stylesheet" href="{{ url_for("static",filename="css/css.css") }}">
-
+     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 </head>
 
 <body>
 <main>
     <nav>
         <ul>
-            <li><a href="{{ url_for("logout") }}">Afmelden</a></li>
+            <li><a onclick="sessionStorage.clear()" href="{{ url_for("logout") }}">Afmelden</a></li>
             <li><a {% block controlpanel %}{% endblock %} href="{{ url_for("controlpanel") }}">Bediening lichten</a></li>
             <li><a {% block timer %}{% endblock %} href="{{ url_for("timer") }}">Timer</a></li>
             <li><a {% block overzicht %}{% endblock %} href="{{ url_for("overzicht") }}">Overzicht</a></li>
@@ -24,7 +24,7 @@
 {% block body %}
 {% endblock %}
 
-<script src="{{ url_for("static",filename="js/scripts.js") }}"></script>
 
+ <script src="{{ url_for("static",filename="js/scripts.js") }}"></script>
 </body>
 </html>

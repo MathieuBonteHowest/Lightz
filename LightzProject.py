@@ -26,14 +26,13 @@ def login():
 
     if request.method == 'POST':
         db = DbClass()
-
+        session['username'] = request.form['username']
         pwd = db.getUser(request.form['username'])
         if pwd:
             if request.form['password'] != pwd[0]:
                 error = "Invalid credentials. Please try again."
             else:
                 session['logged_in'] = True
-                flash('You were just logged in!')
                 return redirect(url_for('overzicht'))
         else:
             error = "Invalid credentials. Please try again."
@@ -43,7 +42,6 @@ def login():
 @login_required
 def logout():
     session.pop('logged_in', None)
-    flash('You were just logged out!')
     return redirect(url_for('login'))
 
 @app.route('/controlpanel')
@@ -53,7 +51,8 @@ def controlpanel():
 
 @app.route('/overzicht')
 def overzicht():
-    return render_template('overzicht.html')
+    username = session['username']
+    return render_template('overzicht.html', username=username)
 
 @app.route('/timer')
 def timer():
