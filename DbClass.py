@@ -6,7 +6,7 @@ class DbClass:
             "host": "localhost",
             "user": "lightz",
             "passwd": "lightz",
-            "db": "db_lightz"
+            "db": "lightz"
         }
 
         self.__connection = connector.connect(**self.__dsn)
