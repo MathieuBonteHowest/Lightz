@@ -9,12 +9,23 @@
 {% endblock %}
 
 {% block body %}
-    <div class="bg2"></div>
-        <div id="flash">
-            <div class="flash-container">
-                <p>Welkom {{ username }}</p>
-            </div>
+    <div id="flash">
+        <div class="flash-container">
+            <img src="{{ url_for('static', filename = 'images/lock-open-blue.png') }}">
+            <p>Welkom {{ username }}</p>
         </div>
+    </div>
+    <div class="parent">
+        <div id="dots" class="light1"></div>
+        <div id="dots" class="light2"></div>
+        <div id="dots" class="light3"></div>
+        <div id="dots" class="light4"></div>
+        <div id="dots" class="light5"></div>
+        <div id="dots" class="light6"></div>
+        <div id="dots" class="light7"></div>
+        <div id="dots" class="light8"></div>
+        <img src="{{ url_for('static', filename = 'images/house.jpg') }}">
+    </div>
 
 
 {% endblock %}
