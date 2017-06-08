@@ -125,43 +125,43 @@ input[type=submit]{
 }
 
 .light1{
-  top: 100px;
+  top: 119px;
   left: 250px;
-  background-color: #D24D57;
 }
 .light2{
   top: 220px;
-  left: 70px;
-  background-color: #D24D57;
+  left: 74px;
 }
 .light3{
   top: 430px;
   left: 115px;
-  background-color: #D24D57;
 }
 .light4{
-  top: 175px;
-  left: 387px;
-  background-color: #D24D57;
+  top: 168px;
+  left: 400px;
 }
 .light5{
   top: 430px;
-  left: 360px;
-  background-color: #D24D57;
+  left: 370px;
 }
 .light6{
   top: 480px;
-  left: 660px;
-  background-color: #D24D57;
+  left: 675px;
 }
 .light7{
-  top: 230px;
-  left: 695px;
-  background-color: #D24D57;
+  top: 252px;
+  left: 675px;
 }
 .light8{
-  top: 80px;
-  left: 610px;
+  top: 107px;
+  left: 600px;
+}
+
+.status1{
+  background-color: #65b37a;
+}
+
+.status2{
   background-color: #D24D57;
 }
 .parent img{
@@ -248,10 +248,6 @@ nav li a:hover {
 
 
 /* control page */
-button:hover {
-  opacity: 0.8;
-}
-
 .button_screen{
   flex-direction: row;
   flex-wrap: wrap;
@@ -291,5 +287,16 @@ button:hover {
 .button_screen div button:nth-child(2){
   border: 2px solid #D24D57;
 }
+
+.button_screen div button:nth-child(2):hover{
+  background-color: #D24D57;
+  opacity: 0.8;
+}
+
+.button_screen button:hover{
+  background-color: #65b37a;
+  opacity:0.8;
+}
+
 /* Smartphone
 

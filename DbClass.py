@@ -24,6 +24,14 @@ class DbClass:
         self.__cursor.close()
         return result
 
+    def getStatus(self):
+        sqlQuery = "SELECT StatusID FROM tbl_overzicht ORDER BY ID"
+
+        self.__cursor.execute(sqlQuery)
+        result = self.__cursor.fetchall()
+        self.__cursor.close()
+        return result
+
     def getDataFromDatabase(self):
         # Query zonder parameters
         sqlQuery = "SELECT * FROM tablename"

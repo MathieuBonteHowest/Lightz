@@ -30,6 +30,7 @@ def login():
         session['username'] = request.form['username']
         pwd = db.getUser(request.form['username'])
         if pwd:
+            print(pwd)
             if request.form['password'] != pwd[0]:
                 error = "Invalid credentials. Please try again."
             else:
@@ -51,11 +52,17 @@ def controlpanel():
     return render_template('controlpanel.html')
 
 @app.route('/overzicht')
+@login_required
 def overzicht():
     username = session['username']
-    return render_template('overzicht.html', username=username)
+
+    db = DbClass()
+    status = db.getStatus()
+    statusList = list(sum(status, ()))
+    return render_template('overzicht.html', username=username, status=statusList)
 
 @app.route('/timer')
+@login_required
 def timer():
     return render_template('timer.html')
 
