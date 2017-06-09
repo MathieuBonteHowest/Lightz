@@ -15,8 +15,8 @@
             <div>
                 <label>Wasplaats</label>
                 {% if status[0] == 1 %}
-                    <button name="button" value="wasplaats_uit" onclick="refreshPage()">Licht uit</button>
-                    <button name="button" value="wasplaats_aan" onclick="refreshPage()" id="status{{ status[0] }}">Licht aan</button>
+                    <button name="button" value="wasplaats_uit">Licht uit</button>
+                    <button name="button" value="wasplaats_aan" id="status{{ status[0] }}">Licht aan</button>
                 {% endif %}
 
                 {% if status[0] == 2 %}
