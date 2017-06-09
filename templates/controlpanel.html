@@ -10,48 +10,92 @@
 
 {% block body %}
 
-    <div class="button_screen">
-        <div>
-            <label>Garage</label>
-            <button name="LightOffGarage">Licht uit</button>
-            <button name="LightOnGarage">Licht aan</button>
-        </div>
-        <div>
-            <label>Inkom</label>
-            <button name="LightOffInkom">Licht uit</button>
-            <button name="LightOnInkom">Licht aan</button>
-        </div>
-        <div>
-            <label>Badkamer</label>
-            <button name="LightOffBadkamer">Licht uit</button>
-            <button name="LightOnBadkamer">Licht aan</button>
+    <form method="POST">
+        <div class="button_screen">
+            <div>
+                <label>Wasplaats</label>
+                {% if status[0] == 1 %}
+                    <button name="button" value="wasplaats_uit" onclick="refreshPage()">Licht uit</button>
+                    <button name="button" value="wasplaats_aan" onclick="refreshPage()" id="status{{ status[0] }}">Licht aan</button>
+                {% endif %}
 
-        </div>
-        <div>
-            <label>Wasplaats</label>
-            <button name="LightOffWasplaats">Licht uit</button>
-            <button name="LightOnWasplaats">Licht aan</button>
-        </div>
-        <div>
-            <label>Keuken</label>
-            <button name="LightOffKeuken">Licht uit</button>
-            <button name="LightOnKeuken">Licht aan</button>
-        </div>
-        <div>
-            <label>Living</label>
-            <button name="LightOffLiving">Licht uit</button>
-            <button name="LightOnLiving">Licht aan</button>
-        </div>
-        <div>
-            <label>Living-tafel</label>
-            <button name="LightOffLivingTafel">Licht uit</button>
-            <button name="LightOnLivingTafel">Licht aan</button>
-        </div>
-        <div>
-            <label>Terras</label>
-            <button name="LightOffTerras">Licht uit</button>
-            <button name="LightOnTerras">Licht aan</button>
-        </div>
-	</div>
+                {% if status[0] == 2 %}
+                    <button name="button" value="wasplaats_uit" id="status{{ status[0] }}">Licht uit</button>
+                    <button name="button" value="wasplaats_aan" >Licht aan</button>
+                {% endif %}
 
+            </div>
+            <div>
+                <label>Badkamer</label>
+                {% if status[1] == 1 %}
+                    <button name="button" value="badkamer_uit">Licht uit</button>
+                    <button name="button" value="badkamer_aan" id="status{{ status[1] }}">Licht aan</button>
+                {% endif %}
+                {% if status[1] == 2 %}
+                    <button name="button" value="badkamer_uit" id="status{{ status[1] }}">Licht uit</button>
+                    <button name="button" value="badkamer_aan">Licht aan</button>
+                {% endif %}
+
+            </div>
+            <div>
+                <label>Garage</label>
+                {% if status[2] == 1 %}
+                    <button name="button" value="garage_uit">Licht uit</button>
+                    <button name="button" value="garage_aan" id="status{{ status[2] }}">Licht aan</button>
+                {% endif %}
+                {% if status[2] == 2 %}
+                    <button name="button" value="garage_uit" id="status{{ status[2] }}">Licht uit</button>
+                    <button name="button" value="garage_aan">Licht aan</button>
+                {% endif %}
+
+            </div>
+            <div>
+                <label>Keuken</label>
+                {% if status[3] == 1 %}
+                    <button name="button" value="keuken_uit">Licht uit</button>
+                    <button name="button" value="keuken_aan" id="status{{ status[3] }}">Licht aan</button>
+                {% endif %}
+                {% if status[3] == 2 %}
+                    <button name="button" value="keuken_uit" id="status{{ status[3] }}">Licht uit</button>
+                    <button name="button" value="keuken_aan">Licht aan</button>
+                {% endif %}
+
+            </div>
+            <div>
+                <label>Inkom</label>
+                {% if status[4] == 1 %}
+                    <button name="button" value="inkom_uit">Licht uit</button>
+                    <button name="button" value="inkom_aan" id="status{{ status[4] }}">Licht aan</button>
+                {% endif %}
+                {% if status[4] == 2 %}
+                    <button name="button" value="inkom_uit" id="status{{ status[4] }}">Licht uit</button>
+                    <button name="button" value="inkom_aan">Licht aan</button>
+                {% endif %}
+
+            </div>
+            <div>
+                <label>Living-tafel</label>
+                {% if status[5] == 1 %}
+                    <button name="button" value="living-tafel_uit">Licht uit</button>
+                    <button name="button" value="living-tafel_aan" id="status{{ status[5] }}">Licht aan</button>
+                {% endif %}
+                {% if status[5] == 2 %}
+                    <button name="button" value="living-tafel_uit" id="status{{ status[5] }}">Licht uit</button>
+                    <button name="button" value="living-tafel_aan">Licht aan</button>
+                {% endif %}
+
+            </div>
+            <div>
+                <label>Living</label>
+                {% if status[6] == 1 %}
+                    <button name="button" value="living_uit">Licht uit</button>
+                    <button name="button" value="living_aan" id="status{{ status[6] }}">Licht aan</button>
+                {% endif %}
+                {% if status[6] == 2 %}
+                    <button name="button" value="living_uit" id="status{{ status[6] }}">Licht uit</button>
+                    <button name="button" value="living_aan">Licht aan</button>
+                {% endif %}
+            </div>
+        </div>
+    </form>
 {% endblock %}

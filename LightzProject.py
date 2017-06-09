@@ -2,6 +2,23 @@ from flask import Flask, render_template, redirect, url_for, request, session, f
 from functools import wraps
 from DbClass import DbClass
 import os
+import RPi.GPIO as GPIO
+import time
+
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
+pinList = [40, 38, 37, 36, 35, 33, 32, 31]
+db = DbClass()
+status = db.getStatus()
+statusList = list(sum(status, ()))
+
+for i in range (0,8):
+    GPIO.setup(pinList[i], GPIO.OUT)
+
+    if statusList[i] == 1:
+        GPIO.output(pinList[i], GPIO.LOW)
+    else:
+        GPIO.output(pinList[i], GPIO.HIGH)
 
 app = Flask(__name__)
 
@@ -26,18 +43,23 @@ def login():
     error = None
 
     if request.method == 'POST':
+        button = request.form['button']
         db = DbClass()
-        session['username'] = request.form['username']
-        pwd = db.getUser(request.form['username'])
-        if pwd:
-            print(pwd)
-            if request.form['password'] != pwd[0]:
-                error = "Invalid credentials. Please try again."
+        if button == 'login':
+            session['username'] = request.form['username']
+            pwd = db.getUser(request.form['username'])
+            if pwd:
+                if request.form['password'] != pwd[0]:
+                    error = "Error: Invalid credentials. Please try again."
+                else:
+                    session['logged_in'] = True
+                    return redirect(url_for('overzicht'))
             else:
-                session['logged_in'] = True
-                return redirect(url_for('overzicht'))
+                error = "Error: Invalid credentials. Please try again."
         else:
-            error = "Invalid credentials. Please try again."
+            username = request.form['username']
+            password = request.form['password']
+            error = db.register(username, password)
     return render_template("login.html", error=error)
 
 @app.route('/logout')
@@ -46,10 +68,83 @@ def logout():
     session.pop('logged_in', None)
     return redirect(url_for('login'))
 
-@app.route('/controlpanel')
+@app.route('/controlpanel', methods=['GET', 'POST'])
 @login_required
 def controlpanel():
-    return render_template('controlpanel.html')
+
+    db = DbClass()
+    statusen = db.getStatus()
+    statusList = list(sum(statusen, ()))
+    if request.method == 'POST':
+        button = request.form['button']
+        if button:
+            if button == 'wasplaats_uit':
+                id = 1
+                status = 2 #uit
+                GPIO.output(pinList[0], GPIO.HIGH)
+            elif button == 'wasplaats_aan':
+                id = 1
+                status = 1 #aan
+                GPIO.output(pinList[0], GPIO.LOW)
+
+            elif button == 'badkamer_uit':
+                id = 2
+                status = 2
+                GPIO.output(pinList[1], GPIO.HIGH)
+            elif button == 'badkamer_aan':
+                id = 2
+                status = 1
+                GPIO.output(pinList[1], GPIO.LOW)
+
+            elif button == 'garage_uit':
+                id = 3
+                status = 2
+                GPIO.output(pinList[2], GPIO.HIGH)
+            elif button == 'garage_aan':
+                id = 3
+                status = 1
+                GPIO.output(pinList[2], GPIO.LOW)
+
+            elif button == 'keuken_uit':
+                id = 4
+                status = 2
+                GPIO.output(pinList[3], GPIO.HIGH)
+            elif button == 'keuken_aan':
+                id = 4
+                status = 1
+                GPIO.output(pinList[3], GPIO.LOW)
+
+            elif button == 'inkom_uit':
+                id = 5
+                status = 2
+                GPIO.output(pinList[4], GPIO.HIGH)
+            elif button == 'inkom_aan':
+                id = 5
+                status = 1
+                GPIO.output(pinList[4], GPIO.LOW)
+
+            elif button == 'living-tafel_uit':
+                id = 6
+                status = 2
+                GPIO.output(pinList[5], GPIO.HIGH)
+            elif button == 'living-tafel_aan':
+                id = 6
+                status = 1
+                GPIO.output(pinList[5], GPIO.LOW)
+
+            elif button == 'living_uit':
+                id = 7
+                status = 2
+                GPIO.output(pinList[6], GPIO.HIGH)
+            elif button == 'living_aan':
+                id = 7
+                status = 1
+                GPIO.output(pinList[6], GPIO.LOW)
+        db = DbClass()
+        db.updateStatus(id,status)
+        return redirect(url_for('controlpanel'))
+
+    return render_template('controlpanel.html', status = statusList)
 
 @app.route('/overzicht')
 @login_required
@@ -59,12 +154,14 @@ def overzicht():
     db = DbClass()
     status = db.getStatus()
     statusList = list(sum(status, ()))
+
     return render_template('overzicht.html', username=username, status=statusList)
 
 @app.route('/timer')
 @login_required
 def timer():
     return render_template('timer.html')
+
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8080))

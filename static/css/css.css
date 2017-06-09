@@ -30,6 +30,29 @@ input:hover{
   opacity: 0.8;
 }
 
+#login-button{
+  opacity: 0.8;
+}
+
+.login-buttons button{
+  background-color: #363636;
+  border: 2px solid transparent;
+  font-size: 16px;
+  font-weight: 200;
+  padding: 10px;
+  width: 50%;
+  display: inline-block;
+  color: #ECF0F1;
+}
+
+.login-buttons button:hover{
+  opacity: 0.8;
+}
+
+#register-page{
+  display: none;
+}
+
 input[type=text], input[type=password] {
   background-color: #ECF0F1;
   border: 2px solid transparent;
@@ -38,6 +61,7 @@ input[type=text], input[type=password] {
   font-weight: 200;
   padding: 10px;
   width: 230px;
+  margin: 5px auto;
 }
 
 input[type=submit]{
@@ -53,7 +77,18 @@ input[type=submit]{
   box-shadow: none;
   display: block;
   width: 250px;
-  margin: 10px auto;
+  margin: 10px auto 25px;
+}
+
+.login-buttons{
+  flex-direction: row;
+  flex-wrap: wrap;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-bottom: 10px;
 }
 
 .login{
@@ -69,9 +104,8 @@ input[type=submit]{
 .login-screen{
   background-color: #fff;
   position: absolute;
-  padding: 20px 0;
   border-radius: 5px;
-  height: 280px;
+  height: 350px;
   width: 100%;
   transition: 1s ease;
   margin:auto;
@@ -94,6 +128,7 @@ input[type=submit]{
   display: block;
   margin: 12px 0;
 }
+
 .bg{
   background-image: url("/static/images/bg.jpg");
   height: 100%;
@@ -163,6 +198,15 @@ input[type=submit]{
 
 .status2{
   background-color: #D24D57;
+}
+
+#status2{
+  background-color: #D24D57;
+  border: 2px solid #363636;
+}
+#status1{
+  background-color: #65b37a;
+  border: 2px solid #363636;
 }
 .parent img{
   display: block;
@@ -298,5 +342,4 @@ nav li a:hover {
   opacity:0.8;
 }
 
-/* Smartphone
-
+/* Smartphone */

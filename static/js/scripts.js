@@ -14,4 +14,22 @@ $(document).ready(function()
 });
 
 
+function register() {
+    document.getElementById('login-page').style.display = "none";
+    document.getElementById('register-button').style.opacity = "0.8";
+    document.getElementById('login-button').style.opacity = "1";
+    document.getElementById('register-page').style.display = "block";
+     $("#register-page").fadeIn("slow");
+}
 
+function login() {
+    document.getElementById('register-page').style.display = "none";
+    document.getElementById('login-button').style.opacity = "0.8";
+    document.getElementById('register-button').style.opacity = "1";
+    document.getElementById('login-page').style.display = "block";
+    $("#login-page").fadeIn("slow");
+}
+
+function refreshPage(){
+    window.location.reload();
+}
