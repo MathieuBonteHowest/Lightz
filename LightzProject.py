@@ -75,12 +75,12 @@ def application():
     @app.route('/controlpanel', methods=['GET', 'POST'])
     @login_required
     def controlpanel():
-
         db = DbClass()
         statusen = db.getStatus()
         statusList = list(sum(statusen, ()))
         if request.method == 'POST':
             button = request.form['button']
+
             if button:
                 if button == 'wasplaats_uit':
                     id = 1
@@ -144,8 +144,31 @@ def application():
                     id = 7
                     status = 1
                     GPIO.output(pinList[6], GPIO.LOW)
-            db = DbClass()
-            db.updateStatus(id,status)
+
+                elif button == 'alles_uit':
+                    id = 100
+                    status = 2
+                    GPIO.output(40, GPIO.HIGH)
+                    GPIO.output(38, GPIO.HIGH)
+                    GPIO.output(37, GPIO.HIGH)
+                    GPIO.output(36, GPIO.HIGH)
+                    GPIO.output(35, GPIO.HIGH)
+                    GPIO.output(33, GPIO.HIGH)
+                    GPIO.output(32, GPIO.HIGH)
+
+                elif button == 'alles_aan':
+                    id = 100
+                    status = 1
+                    GPIO.output(40, GPIO.LOW)
+                    GPIO.output(38, GPIO.LOW)
+                    GPIO.output(37, GPIO.LOW)
+                    GPIO.output(36, GPIO.LOW)
+                    GPIO.output(35, GPIO.LOW)
+                    GPIO.output(33, GPIO.LOW)
+                    GPIO.output(32, GPIO.LOW)
+
+                db = DbClass()
+                db.updateStatus(id,status)
             return redirect(url_for('controlpanel'))
 
         return render_template('controlpanel.html', status = statusList)
@@ -171,22 +194,23 @@ def application():
     return app
 
 def sensor():
-    while True:
-        GPIO.setup(40, GPIO.IN)
-        GPIO.setup(32, GPIO.OUT)
-        i = GPIO.input(40)
-        if i == 0:
-            GPIO.output(32, 1)
-        elif i == 1:
-            GPIO.output(32,0)
-            time.sleep(5)
+    # while True:
+    #     GPIO.setup(40, GPIO.IN)
+    #     GPIO.setup(32, GPIO.OUT)
+    #     i = GPIO.input(40)
+    #     if i == 0:
+    #         GPIO.output(32, 1)
+    #     elif i == 1:
+    #         GPIO.output(32,0)
+    #         time.sleep(5)
+    pass
 
 def main():
     t1 = Thread(target=application)
     t2 = Thread(target=sensor)
     t1.start()
     t2.start()
-    application().run(host=host, port=port, debug=True, use_reloader=False)
+    application().run(host=host, port=port, debug=True, use_reloader=True)
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8080))

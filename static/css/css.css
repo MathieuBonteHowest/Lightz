@@ -342,4 +342,20 @@ nav li a:hover {
   opacity:0.8;
 }
 
+.button_screen .alles{
+  text-align: center;
+}
+
+.button_screen .alles label{
+  float: none;
+  margin-right: 30px;
+}
+.button_screen .alles button{
+  float: none;
+}
+
+
+.button_screen .alles{
+  border: none;
+}
 /* Smartphone */

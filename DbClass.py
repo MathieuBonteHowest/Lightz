@@ -54,8 +54,12 @@ class DbClass:
         return message
 
     def updateStatus(self, id, status):
-        sqlQuery = "UPDATE tbl_overzicht SET StatusID =  '{param2}' WHERE ID = '{param1}'"
-        sqlCommand = sqlQuery.format(param1=id, param2=status)
+        if id == 100:
+            sqlQuery = "UPDATE tbl_overzicht SET StatusID = '{param2}' WHERE ID = 1 OR ID = 2 OR ID = 3 OR ID = 4 OR ID = 5 OR ID = 6 OR ID = 7"
+            sqlCommand = sqlQuery.format(param2=status)
+        else:
+            sqlQuery = "UPDATE tbl_overzicht SET StatusID =  '{param2}' WHERE ID = '{param1}'"
+            sqlCommand = sqlQuery.format(param1=id, param2=status)
 
         self.__cursor.execute(sqlCommand)
         self.__connection.commit()
