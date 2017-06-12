@@ -358,4 +358,61 @@ nav li a:hover {
 .button_screen .alles{
   border: none;
 }
+
+
+#periode_form{
+  text-align: center;
+  border-bottom: 1px solid #363636;
+}
+
+
+#periode_form input[type=text]{
+  width: 60px;
+
+}
+#periode_form input[type=submit]{
+  width: 172px;
+  margin: 15px auto;
+}
+
+#periode_form div .label{
+  margin-right: 20px;
+  width: 40px;
+  display: inline-block;
+  margin-left: -115px;
+}
+
+#periode_form select{
+  width: 172px;
+  margin: 5px auto;
+}
+
+#periode_form #periode_start{
+  margin-left: 114px;
+}
+
+#periode_form #periode_einde{
+  margin-left: 114px;
+}
+
+#periode_form #timer_licht{
+  margin-left: 114px;
+}
+
+#periode_form #timer_start{
+  margin-left: 118px;
+}
+
+#periode_form #periode_head label{
+  float: left;
+  display: block;
+  margin-left: 40px;
+  font-size: 1.5em;
+}
+
+#periode_form .controls{
+  margin-top: 40px;
+}
+
+
 /* Smartphone */

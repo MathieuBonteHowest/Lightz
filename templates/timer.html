@@ -10,6 +10,71 @@
 
 {% block body %}
 
+<form method="post" id="periode_form">
+    <div id="periode_head">
+        <label>Periode</label>
+    </div>
+    <div class="controls">
+    <div id="periode_licht">
+        <div class="label">
+            <label>Licht</label>
+        </div>
+        <select name="periode_licht" id="licht">
+            <option value="1">Wasplaats</option>
+            <option value="2">Badkamer</option>
+            <option value="3">Garage</option>
+            <option value="4">Keuken</option>
+            <option value="5">Inkom</option>
+            <option value="6">Living-tafel</option>
+            <option value="7">Living</option>
+        </select>
+    </div>
+    <div id="periode_start">
+        <div class="label">
+            <label>Start</label>
+        </div>
+        <input type="text" placeholder="Uur" name="uur_start_periode">
+        <input type="text" placeholder="Minuten" name="minuten_start_periode">
+    </div>
+    <div id="periode_einde">
+        <div class="label">
+            <label>Einde</label>
+        </div>
+        <input type="text" placeholder="Uur" name="uur_einde_periode">
+        <input type="text" placeholder="Minuten" name="minuten_einde_periode">
+    </div>
+    </div>
+    <input type="submit" value="opslaan periode" id="periode_id" name="button">
+</form>
 
+<form method="post" id="periode_form">
+<div id="periode_head">
+    <label>Timer</label>
+</div>
+<div class="controls">
+<div id="timer_licht">
+    <div class="label">
+        <label>Licht</label>
+    </div>
+    <select name="timer_licht" id="licht">
+        <option value="1">Wasplaats</option>
+        <option value="2">Badkamer</option>
+        <option value="3">Garage</option>
+        <option value="4">Keuken</option>
+        <option value="5">Inkom</option>
+        <option value="6">Living-tafel</option>
+        <option value="7">Living</option>
+    </select>
+</div>
+<div id="timer_start">
+    <div class="label">
+        <label>Uit na</label>
+    </div>
+    <input type="text" placeholder="Uur" name="uur_start_timer">
+    <input type="text" placeholder="Minuten" name="minuten_start_timer">
+</div>
+</div>
+<input type="submit" value="opslaan timer" id="timer_id" name="button">
+</form>
 
 {% endblock %}

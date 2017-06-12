@@ -5,7 +5,8 @@ from DbClass import DbClass
 import os
 import RPi.GPIO as GPIO
 from threading import Thread
-import time
+import threading
+from datetime import datetime, timedelta
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
@@ -34,7 +35,6 @@ def application():
             if 'logged_in' in session:
                 return f(*args, **kwargs)
             else:
-                flash('You need to login first.')
                 return redirect(url_for('login'))
         return wrap
 
@@ -184,11 +184,84 @@ def application():
 
         return render_template('overzicht.html', username=username, status=statusList)
 
-
-
-    @app.route('/timer')
+    @app.route('/timer', methods=['GET', 'POST'])
     @login_required
     def timer():
+        if request.method == 'POST':
+            button = request.form['button']
+            db = DbClass()
+            if button == "opslaan timer":
+                licht_timer = int(request.form['timer_licht'])
+                uur_timer = int(request.form['uur_start_timer'])
+                minuten_timer = int(request.form['minuten_start_timer'])
+
+                #hour = *3600
+                #minutes = *60
+                delay = (uur_timer * 3600) + (minuten_timer * 60)
+
+                if licht_timer == 1:
+                    GPIO.output(40, GPIO.LOW)
+                    threading.Timer(delay, timer_off, args=(1,40,)).start()
+
+                elif licht_timer == 2:
+                    GPIO.output(38, GPIO.LOW)
+                    threading.Timer(delay, timer_off, args=(2, 38,)).start()
+
+                elif licht_timer == 3:
+                    GPIO.output(37, GPIO.LOW)
+                    threading.Timer(delay, timer_off, args=(3, 37,)).start()
+
+                elif licht_timer == 4:
+                    GPIO.output(36, GPIO.LOW)
+                    threading.Timer(delay, timer_off, args=(4, 36,)).start()
+
+                elif licht_timer == 5:
+                    GPIO.output(35, GPIO.LOW)
+                    threading.Timer(delay, timer_off, args=(5, 35,)).start()
+
+                elif licht_timer == 6:
+                    GPIO.output(33, GPIO.LOW)
+                    threading.Timer(delay, timer_off, args=(6, 33,)).start()
+
+                elif licht_timer == 7:
+                    GPIO.output(32, GPIO.LOW)
+                    threading.Timer(delay, timer_off, args=(7, 32,)).start()
+
+                db.updateStatus(licht_timer, 1)
+
+            else:
+                now = datetime.now() + timedelta(hours=2)
+                now_format = format(now, '%H:%M:%S')
+                print(now_format)
+
+                licht_periode = int(request.form['periode_licht'])
+                begin_uur = int(request.form['uur_start_periode'])
+                begin_minuut = int(request.form['minuten_start_periode'])
+                eind_uur = int(request.form['uur_einde_periode'])
+                eind_minuut = int(request.form['minuten_einde_periode'])
+
+                date_hour = str(now_format)[0:2]
+                date_min = str(now_format)[3:5]
+                date_sec = str(now_format)[6:]
+
+                delay_hour_begin = (begin_uur - int(date_hour)) * 3600
+                delay_min_begin = (begin_minuut - int(date_min) -1) * 60
+                delay_sec_begin = (60- int(date_sec))
+
+                delay_hour_einde = (eind_uur - int(date_hour)) * 3600
+                delay_min_einde = (eind_minuut - int(date_min) -1) * 60
+                delay_sec_einde = (60- int(date_sec))
+
+                delay_begin = delay_hour_begin + delay_min_begin + delay_sec_begin
+                delay_einde = delay_hour_einde + delay_min_einde +delay_sec_einde
+
+                if licht_periode == 1:
+                    threading.Timer(delay_begin, periode_on, args=(1,40, delay_einde,)).start()
+
+                elif licht_periode == 2:
+                    threading.Timer(delay_begin, periode_on, args=(2,38, delay_einde,)).start()
+
+
         return render_template('timer.html')
 
     return app
@@ -205,12 +278,28 @@ def sensor():
     #         time.sleep(5)
     pass
 
+def timer_off(id, light):
+    db = DbClass()
+    GPIO.output(light, GPIO.HIGH)
+    db.updateStatus(id, 2)
+
+def periode_on(id, light, delay_einde):
+    db =DbClass()
+    GPIO.output(light, GPIO.LOW)
+    db.updateStatus(id, 1)
+    threading.Timer(delay_einde, periode_off, args=(1, 40,)).start()
+
+def periode_off(id, light):
+    db = DbClass()
+    GPIO.output(light, GPIO.HIGH)
+    db.updateStatus(id, 2)
+
 def main():
     t1 = Thread(target=application)
     t2 = Thread(target=sensor)
     t1.start()
     t2.start()
-    application().run(host=host, port=port, debug=True, use_reloader=True)
+    application().run(host=host, port=port, debug=True, use_reloader=False)
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8080))
