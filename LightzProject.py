@@ -52,9 +52,9 @@ def application():
             db = DbClass()
             if button == 'login':
                 session['username'] = request.form['username']
-                pwd = db.getUser(request.form['username'])
+                pwd = db.getUser(request.form['username'], request.form['password'])
                 if pwd:
-                    if request.form['password'] != pwd[0]:
+                    if True != pwd:
                         error = "Error: Invalid credentials. Please try again."
                     else:
                         session['logged_in'] = True
@@ -64,7 +64,8 @@ def application():
             else:
                 username = request.form['username']
                 password = request.form['password']
-                error = db.register(username, password)
+                code = request.form['code']
+                error = db.register(username, password, code)
         return render_template("login.html", error=error)
 
     @app.route('/logout')
@@ -281,8 +282,6 @@ def sensor():
             db.updateStatus(8, 1)
             db2.insertSensorValue(1)
             time.sleep(10)
-
-
 
 def timer_off(id, light):
     db = DbClass()

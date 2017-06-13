@@ -1,3 +1,7 @@
+import hashlib
+import binascii
+import os
+
 class DbClass:
     def __init__(self):
         import mysql.connector as connector
@@ -13,16 +17,29 @@ class DbClass:
         self.__cursor = self.__connection.cursor()
 
 
-    def getUser(self, username):
+    def getUser(self, username, password):
         # Query met parameters
-        sqlQuery = "SELECT password FROM tbl_users WHERE login = '{param1}'"
+        sqlQuery = "SELECT pwd_hash, pwd_salt FROM tbl_users WHERE username = '{param1}'"
         # Combineren van de query en parameter
         sqlCommand = sqlQuery.format(param1=username)
 
         self.__cursor.execute(sqlCommand)
         result = self.__cursor.fetchone()
+
+        if not result:
+            return False
+
+        db_hash_string = result[0]
+        db_salt_string = result[1]
+
+
+        pwd_bytes = bytes(password, 'utf-8')
+        db_salt_bytes = binascii.unhexlify(db_salt_string)
+
+        hash_bytes = hashlib.pbkdf2_hmac('sha256', pwd_bytes, db_salt_bytes, 100000)
+        hash_string = binascii.hexlify(hash_bytes).decode('utf-8')
         self.__cursor.close()
-        return result
+        return hash_string == db_hash_string
 
     def getStatus(self):
         sqlQuery = "SELECT StatusID FROM tbl_overzicht ORDER BY ID"
@@ -32,24 +49,33 @@ class DbClass:
         self.__cursor.close()
         return result
 
-    def register(self, username, password):
+    def register(self, username, password, code):
         #Query met parameters
-        sqlQuery = "Select ID from tbl_users WHERE Login = '{param1}'"
+        sqlQuery = "Select * from tbl_users WHERE username = '{param1}'"
         sqlCommand = sqlQuery.format(param1=username)
         self.__cursor.execute(sqlCommand)
         result = self.__cursor.fetchone()
 
-        if result:
-            message = "Error: Deze gebruiker bestaat al"
+        if int(code) == 25081998:
+            if result:
+                message = "Error: Deze gebruiker bestaat al"
+            else:
+                pwd_bytes = bytes(password, 'utf-8')
+                salt_bytes = os.urandom(16)
+                hash_bytes = hashlib.pbkdf2_hmac('sha256', pwd_bytes, salt_bytes, 100000)
+                salt_string = binascii.hexlify(salt_bytes).decode('utf-8')
+                hash_string = binascii.hexlify(hash_bytes).decode('utf-8')
+
+                sqlQuery2 = "INSERT INTO tbl_users (username, pwd_hash, pwd_salt) VALUES ('{param1}', '{param2}', '{param3}')"
+                sqlCommand2 = sqlQuery2.format(param1=username, param2=hash_string, param3=salt_string)
+
+                self.__cursor.execute(sqlCommand2)
+                self.__connection.commit()
+                self.__cursor.close()
+
+                message = "Succesvol geregistreerd"
         else:
-            sqlQuery2 = "INSERT INTO tbl_users (Login, Password) VALUES ('{param1}', '{param2}')"
-            sqlCommand2 = sqlQuery2.format(param1=username, param2=password)
-
-            self.__cursor.execute(sqlCommand2)
-            self.__connection.commit()
-            self.__cursor.close()
-
-            message = "Succesvol geregistreerd"
+            message = "Foute code"
 
         return message
 

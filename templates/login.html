@@ -22,9 +22,11 @@
           <input type="text" name="username" placeholder="username" onBlur="if(this.value == '') this.value = ''" onFocus="if(this.value == 'username') this.value = ''" required>
           <input type="password" name="password" placeholder="password" onBlur="if(this.value == '') this.value = ''" onFocus="if(this.value == 'password') this.value = ''" required>
           <input type="submit" value="login" id="login_id" name="button">
+          <div class="error">
           {% if error %}
               {{ error }}
           {% endif %}
+          </div>
       </form>
     </div>
 
@@ -34,7 +36,13 @@
       <form method="post" class="login-form">
           <input type="text" name="username" placeholder="username" onBlur="if(this.value == '') this.value = ''" onFocus="if(this.value == 'username') this.value = ''" required>
           <input type="password" name="password" placeholder="password" onBlur="if(this.value == '') this.value = ''" onFocus="if(this.value == 'password') this.value = ''" required>
+          <input type="password" name="code" placeholder="code" onBlur="if(this.value == '') this.value = ''" onFocus="if(this.value == 'code') this.value = ''" required>
           <input type="submit" value="register" id="register_id" name="button">
+          <div class="error">
+          {% if error %}
+              {{ error }}
+          {% endif %}
+          </div>
       </form>
         </div>
   </div>

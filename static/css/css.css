@@ -414,5 +414,9 @@ nav li a:hover {
   margin-top: 40px;
 }
 
+.error{
+  font-size: 0.8em;
+  color: #D24D57;
+}
 
 /* Smartphone */
