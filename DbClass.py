@@ -53,6 +53,15 @@ class DbClass:
 
         return message
 
+    def insertSensorValue(self, value):
+
+        sqlQuery = "INSERT INTO tbl_sensor (SensorWaarde, Timestam) VALUES ('{param1}', CURRENT_TIMESTAMP )"
+        sqlCommand = sqlQuery.format(param1=value)
+
+        self.__cursor.execute(sqlCommand)
+        self.__connection.commit()
+        self.__cursor.close()
+
     def updateStatus(self, id, status):
         if id == 100:
             sqlQuery = "UPDATE tbl_overzicht SET StatusID = '{param2}' WHERE ID = 1 OR ID = 2 OR ID = 3 OR ID = 4 OR ID = 5 OR ID = 6 OR ID = 7"
@@ -64,34 +73,3 @@ class DbClass:
         self.__cursor.execute(sqlCommand)
         self.__connection.commit()
         self.__cursor.close()
-
-
-    # def getDataFromDatabase(self):
-    #     # Query zonder parameters
-    #     sqlQuery = "SELECT * FROM tablename"
-    #
-    #     self.__cursor.execute(sqlQuery)
-    #     result = self.__cursor.fetchall()
-    #     self.__cursor.close()
-    #     return result
-    #
-    # def getDataFromDatabaseMetVoorwaarde(self, voorwaarde):
-    #     # Query met parameters
-    #     sqlQuery = "SELECT * FROM tablename WHERE columnname = '{param1}'"
-    #     # Combineren van de query en parameter
-    #     sqlCommand = sqlQuery.format(param1=voorwaarde)
-    #
-    #     self.__cursor.execute(sqlCommand)
-    #     result = self.__cursor.fetchall()
-    #     self.__cursor.close()
-    #     return result
-    #
-    # def setDataToDatabase(self, value1):
-    #     # Query met parameters
-    #     sqlQuery = "INSERT INTO tablename (columnname) VALUES ('{param1}')"
-    #     # Combineren van de query en parameter
-    #     sqlCommand = sqlQuery.format(param1=value1)
-    #
-    #     self.__cursor.execute(sqlCommand)
-    #     self.__connection.commit()
-    #     self.__cursor.close()

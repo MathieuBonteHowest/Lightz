@@ -1,4 +1,3 @@
-from threading import Thread
 from flask import Flask, render_template, redirect, url_for, request, session, flash
 from functools import wraps
 from DbClass import DbClass
@@ -7,6 +6,7 @@ import RPi.GPIO as GPIO
 from threading import Thread
 import threading
 from datetime import datetime, timedelta
+import time
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
@@ -14,6 +14,7 @@ pinList = [40, 38, 37, 36, 35, 33, 32, 31]
 db = DbClass()
 status = db.getStatus()
 statusList = list(sum(status, ()))
+print(datetime.now())
 
 def application():
     for i in range (0,8):
@@ -267,16 +268,21 @@ def application():
     return app
 
 def sensor():
-    # while True:
-    #     GPIO.setup(40, GPIO.IN)
-    #     GPIO.setup(32, GPIO.OUT)
-    #     i = GPIO.input(40)
-    #     if i == 0:
-    #         GPIO.output(32, 1)
-    #     elif i == 1:
-    #         GPIO.output(32,0)
-    #         time.sleep(5)
-    pass
+    while True:
+        db = DbClass()
+        db2 = DbClass()
+        GPIO.setup(12, GPIO.IN)
+        i = GPIO.input(12)
+        if i == 0:
+            GPIO.output(31, 1)
+            db.updateStatus(8, 2)
+        elif i == 1:
+            GPIO.output(31,0)
+            db.updateStatus(8, 1)
+            db2.insertSensorValue(1)
+            time.sleep(10)
+
+
 
 def timer_off(id, light):
     db = DbClass()
