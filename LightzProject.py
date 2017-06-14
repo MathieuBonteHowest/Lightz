@@ -14,7 +14,6 @@ pinList = [40, 38, 37, 36, 35, 33, 32, 31]
 db = DbClass()
 status = db.getStatus()
 statusList = list(sum(status, ()))
-print(datetime.now())
 
 def application():
     for i in range (0,8):
@@ -232,9 +231,8 @@ def application():
                 db.updateStatus(licht_timer, 1)
 
             else:
-                now = datetime.now() + timedelta(hours=2)
+                now = datetime.now()
                 now_format = format(now, '%H:%M:%S')
-                print(now_format)
 
                 licht_periode = int(request.form['periode_licht'])
                 begin_uur = int(request.form['uur_start_periode'])
@@ -259,9 +257,18 @@ def application():
 
                 if licht_periode == 1:
                     threading.Timer(delay_begin, periode_on, args=(1,40, delay_einde,)).start()
-
                 elif licht_periode == 2:
                     threading.Timer(delay_begin, periode_on, args=(2,38, delay_einde,)).start()
+                elif licht_periode == 3:
+                    threading.Timer(delay_begin, periode_on, args=(3,37, delay_einde,)).start()
+                elif licht_periode == 4:
+                    threading.Timer(delay_begin, periode_on, args=(4,36, delay_einde,)).start()
+                elif licht_periode == 5:
+                    threading.Timer(delay_begin, periode_on, args=(5,35, delay_einde,)).start()
+                elif licht_periode == 6:
+                    threading.Timer(delay_begin, periode_on, args=(6,33, delay_einde,)).start()
+                elif licht_periode == 7:
+                    threading.Timer(delay_begin, periode_on, args=(7,32, delay_einde,)).start()
 
 
         return render_template('timer.html')
@@ -292,7 +299,7 @@ def periode_on(id, light, delay_einde):
     db =DbClass()
     GPIO.output(light, GPIO.LOW)
     db.updateStatus(id, 1)
-    threading.Timer(delay_einde, periode_off, args=(1, 40,)).start()
+    threading.Timer(delay_einde, periode_off, args=(id, light,)).start()
 
 def periode_off(id, light):
     db = DbClass()
