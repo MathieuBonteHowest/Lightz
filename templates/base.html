@@ -26,6 +26,24 @@
 {% endblock %}
 
 
+	<footer class="footer-distributed">
+
+			<div class="footer-left">
+
+				<p class="footer-links">
+					<a href="{{ url_for("overzicht") }}">Overzicht</a>
+					<a href="{{ url_for("timer") }}">Timer</a>
+					<a href="{{ url_for("controlpanel") }}">Bediening lichten</a>
+					<a onclick="sessionStorage.clear()" href="{{ url_for("logout") }}">Afmelden</a>
+				</p>
+                <p class="footer-links"><a href="http://student.howest.be/mathieu.bonte/portfolio" target="_blank">Portfolio</a></p>
+
+                <p>Mathieu Bonte &copy; 2017</p>
+			</div>
+
+	</footer>
  <script src="{{ url_for("static",filename="js/scripts.js") }}"></script>
+
+
 </body>
 </html>

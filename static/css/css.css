@@ -362,15 +362,28 @@ nav li a:hover {
 
 #periode_form{
   text-align: center;
-  border-bottom: 1px solid #363636;
+  margin-bottom: 100px;
 }
 
+#timer_form{
+  text-align: center;
+  margin-bottom: 220px;
+}
 
 #periode_form input[type=text]{
   width: 60px;
-
 }
+
+#timer_form input[type=text]{
+  width: 60px;
+}
+
 #periode_form input[type=submit]{
+  width: 172px;
+  margin: 15px auto;
+}
+
+#timer_form input[type=submit]{
   width: 172px;
   margin: 15px auto;
 }
@@ -381,11 +394,24 @@ nav li a:hover {
   display: inline-block;
   margin-left: -115px;
 }
+#timer_form div .label{
+  margin-right: 20px;
+  width: 40px;
+  display: inline-block;
+  margin-left: -115px;
+}
+
 
 #periode_form select{
   width: 172px;
   margin: 5px auto;
 }
+
+#timer_form select{
+  width: 172px;
+  margin: 5px auto;
+}
+
 
 #periode_form #periode_start{
   margin-left: 114px;
@@ -395,11 +421,11 @@ nav li a:hover {
   margin-left: 114px;
 }
 
-#periode_form #timer_licht{
+#timer_form #timer_licht{
   margin-left: 114px;
 }
 
-#periode_form #timer_start{
+#timer_form #timer_start{
   margin-left: 118px;
 }
 
@@ -410,7 +436,18 @@ nav li a:hover {
   font-size: 1.5em;
 }
 
+#timer_form #timer_head label{
+  float: left;
+  display: block;
+  margin-left: 40px;
+  font-size: 1.5em;
+}
+
 #periode_form .controls{
+  margin-top: 40px;
+}
+
+#timer_form .controls{
   margin-top: 40px;
 }
 
@@ -418,5 +455,38 @@ nav li a:hover {
   font-size: 0.8em;
   color: #D24D57;
 }
+
+.footer-distributed{
+	background-color: #363636;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
+	width: 100%;
+	text-align: left;
+	padding: 45px 80px;
+	margin-top: 80px;
+}
+
+.footer-distributed .footer-left p{
+	color:  #e9e9e9;
+	font-size: 12px;
+	margin: 0;
+}
+
+.footer-distributed p.footer-links{
+	font-size:14px;
+	font-weight: normal;
+	color:  #e9e9e9;
+	margin: 0 0 10px;
+	padding: 0;
+}
+
+.footer-distributed p.footer-links a{
+	display:inline-block;
+	line-height: 1.8;
+	text-decoration: none;
+	color:  inherit;
+    margin-right: 10px;
+}
+
 
 /* Smartphone */
