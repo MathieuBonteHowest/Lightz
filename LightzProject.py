@@ -311,7 +311,6 @@ def sensor():
             db.updateStatus(8, 1)
             db2.insertSensorValue(1)
             time.sleep(60)
-        print(i)
         time.sleep(0.5)
 
 def timer_off(id, light):
