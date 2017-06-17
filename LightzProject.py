@@ -54,12 +54,12 @@ def application():
                 pwd = db.getUser(request.form['username'], request.form['password'])
                 if pwd:
                     if True != pwd:
-                        error = "Error: Invalid credentials. Please try again."
+                        error = "Error: Ongeldige login. Probeer het opnieuw."
                     else:
                         session['logged_in'] = True
                         return redirect(url_for('overzicht'))
                 else:
-                    error = "Error: Invalid credentials. Please try again."
+                    error = "Error: Ongeldige login. Probeer het opnieuw."
             else:
                 username = request.form['username']
                 password = request.form['password']
@@ -188,99 +188,121 @@ def application():
     @app.route('/timer', methods=['GET', 'POST'])
     @login_required
     def timer():
+        error = ''
         if request.method == 'POST':
             button = request.form['button']
             db = DbClass()
             if button == "opslaan timer":
-                licht_timer = int(request.form['timer_licht'])
-                uur_timer = int(request.form['uur_start_timer'])
-                minuten_timer = int(request.form['minuten_start_timer'])
+                uur = request.form['uur_start_timer']
+                minuten = request.form['minuten_start_timer']
+                if (uur.isdigit()) and (minuten.isdigit()):
+                    if (int(uur) > 23) or (int(minuten) > 59):
+                        error = "Error: Foute gegevens."
+                    else:
+                        licht_timer = int(request.form['timer_licht'])
+                        uur_timer = int(uur)
+                        minuten_timer = int(minuten)
 
-                #hour = *3600
-                #minutes = *60
-                delay = (uur_timer * 3600) + (minuten_timer * 60)
+                        #hour = *3600
+                        #minutes = *60
+                        delay = (uur_timer * 3600) + (minuten_timer * 60)
 
-                if licht_timer == 1:
-                    GPIO.output(40, GPIO.LOW)
-                    threading.Timer(delay, timer_off, args=(1,40,)).start()
+                        if licht_timer == 1:
+                            GPIO.output(40, GPIO.LOW)
+                            threading.Timer(delay, timer_off, args=(1,40,)).start()
 
-                elif licht_timer == 2:
-                    GPIO.output(38, GPIO.LOW)
-                    threading.Timer(delay, timer_off, args=(2, 38,)).start()
+                        elif licht_timer == 2:
+                            GPIO.output(38, GPIO.LOW)
+                            threading.Timer(delay, timer_off, args=(2, 38,)).start()
 
-                elif licht_timer == 3:
-                    GPIO.output(37, GPIO.LOW)
-                    threading.Timer(delay, timer_off, args=(3, 37,)).start()
+                        elif licht_timer == 3:
+                            GPIO.output(37, GPIO.LOW)
+                            threading.Timer(delay, timer_off, args=(3, 37,)).start()
 
-                elif licht_timer == 4:
-                    GPIO.output(36, GPIO.LOW)
-                    threading.Timer(delay, timer_off, args=(4, 36,)).start()
+                        elif licht_timer == 4:
+                            GPIO.output(36, GPIO.LOW)
+                            threading.Timer(delay, timer_off, args=(4, 36,)).start()
 
-                elif licht_timer == 5:
-                    GPIO.output(35, GPIO.LOW)
-                    threading.Timer(delay, timer_off, args=(5, 35,)).start()
+                        elif licht_timer == 5:
+                            GPIO.output(35, GPIO.LOW)
+                            threading.Timer(delay, timer_off, args=(5, 35,)).start()
 
-                elif licht_timer == 6:
-                    GPIO.output(33, GPIO.LOW)
-                    threading.Timer(delay, timer_off, args=(6, 33,)).start()
+                        elif licht_timer == 6:
+                            GPIO.output(33, GPIO.LOW)
+                            threading.Timer(delay, timer_off, args=(6, 33,)).start()
 
-                elif licht_timer == 7:
-                    GPIO.output(32, GPIO.LOW)
-                    threading.Timer(delay, timer_off, args=(7, 32,)).start()
+                        elif licht_timer == 7:
+                            GPIO.output(32, GPIO.LOW)
+                            threading.Timer(delay, timer_off, args=(7, 32,)).start()
 
-                db.updateStatus(licht_timer, 1)
+                        db.updateStatus(licht_timer, 1)
+                        error = "Succesvol opgeslagen."
+                else:
+                    error = "Error: Foute gegevens."
 
             else:
-                now = datetime.now()
-                now_format = format(now, '%H:%M:%S')
+                uur_start = request.form['uur_start_periode']
+                minuten_start = request.form['minuten_start_periode']
+                uur_einde = request.form['uur_einde_periode']
+                minuten_einde = request.form['minuten_einde_periode']
 
-                licht_periode = int(request.form['periode_licht'])
-                begin_uur = int(request.form['uur_start_periode'])
-                begin_minuut = int(request.form['minuten_start_periode'])
-                eind_uur = int(request.form['uur_einde_periode'])
-                eind_minuut = int(request.form['minuten_einde_periode'])
+                if (uur_start.isdigit()) and (minuten_start.isdigit()) and (uur_einde.isdigit()) and (minuten_einde.isdigit()):
+                    if (int(uur_start) > 23) or (int(minuten_start) > 59) or (int(uur_einde) > 23) or (int(minuten_einde) > 59):
+                        error = "Error: Foute gegevens."
+                    else:
+                        now = datetime.now()
+                        now_format = format(now, '%H:%M:%S')
 
-                date_hour = str(now_format)[0:2]
-                date_min = str(now_format)[3:5]
-                date_sec = str(now_format)[6:]
+                        licht_periode = int(request.form['periode_licht'])
+                        begin_uur = int(uur_start)
+                        begin_minuut = int(minuten_start)
+                        eind_uur = int(uur_einde)
+                        eind_minuut = int(minuten_einde)
 
-                delay_hour_begin = (begin_uur - int(date_hour)) * 3600
-                delay_min_begin = (begin_minuut - int(date_min) -1) * 60
-                delay_sec_begin = (60- int(date_sec))
+                        date_hour = str(now_format)[0:2]
+                        date_min = str(now_format)[3:5]
+                        date_sec = str(now_format)[6:]
 
-                delay_hour_einde = (eind_uur - int(date_hour)) * 3600
-                delay_min_einde = (eind_minuut - int(date_min) -1) * 60
-                delay_sec_einde = (60- int(date_sec))
+                        delay_hour_begin = (begin_uur - int(date_hour)) * 3600
+                        delay_min_begin = (begin_minuut - int(date_min) -1) * 60
+                        delay_sec_begin = (60- int(date_sec))
 
-                delay_begin = delay_hour_begin + delay_min_begin + delay_sec_begin
-                delay_einde = delay_hour_einde + delay_min_einde +delay_sec_einde
+                        delay_hour_einde = (eind_uur - int(date_hour)) * 3600
+                        delay_min_einde = (eind_minuut - int(date_min) -1) * 60
+                        delay_sec_einde = (60- int(date_sec))
 
-                if licht_periode == 1:
-                    threading.Timer(delay_begin, periode_on, args=(1,40, delay_einde,)).start()
-                elif licht_periode == 2:
-                    threading.Timer(delay_begin, periode_on, args=(2,38, delay_einde,)).start()
-                elif licht_periode == 3:
-                    threading.Timer(delay_begin, periode_on, args=(3,37, delay_einde,)).start()
-                elif licht_periode == 4:
-                    threading.Timer(delay_begin, periode_on, args=(4,36, delay_einde,)).start()
-                elif licht_periode == 5:
-                    threading.Timer(delay_begin, periode_on, args=(5,35, delay_einde,)).start()
-                elif licht_periode == 6:
-                    threading.Timer(delay_begin, periode_on, args=(6,33, delay_einde,)).start()
-                elif licht_periode == 7:
-                    threading.Timer(delay_begin, periode_on, args=(7,32, delay_einde,)).start()
+                        delay_begin = delay_hour_begin + delay_min_begin + delay_sec_begin
+                        delay_einde = delay_hour_einde + delay_min_einde +delay_sec_einde
+
+                        if licht_periode == 1:
+                            threading.Timer(delay_begin, periode_on, args=(1,40, delay_einde,)).start()
+                        elif licht_periode == 2:
+                            threading.Timer(delay_begin, periode_on, args=(2,38, delay_einde,)).start()
+                        elif licht_periode == 3:
+                            threading.Timer(delay_begin, periode_on, args=(3,37, delay_einde,)).start()
+                        elif licht_periode == 4:
+                            threading.Timer(delay_begin, periode_on, args=(4,36, delay_einde,)).start()
+                        elif licht_periode == 5:
+                            threading.Timer(delay_begin, periode_on, args=(5,35, delay_einde,)).start()
+                        elif licht_periode == 6:
+                            threading.Timer(delay_begin, periode_on, args=(6,33, delay_einde,)).start()
+                        elif licht_periode == 7:
+                            threading.Timer(delay_begin, periode_on, args=(7,32, delay_einde,)).start()
+                        error = "Succesvol opgeslagen."
+                else:
+                    error = "Error: Foute gegevens."
 
 
-        return render_template('timer.html')
+        return render_template('timer.html', error=error)
 
     return app
 
 def sensor():
     while True:
-        db = DbClass()
-        db2 = DbClass()
         GPIO.setup(12, GPIO.IN)
         i = GPIO.input(12)
+        db = DbClass()
+        db2 = DbClass()
         if i == 0:
             GPIO.output(31, 1)
             db.updateStatus(8, 2)
@@ -288,7 +310,9 @@ def sensor():
             GPIO.output(31,0)
             db.updateStatus(8, 1)
             db2.insertSensorValue(1)
-            time.sleep(10)
+            time.sleep(60)
+        print(i)
+        time.sleep(0.5)
 
 def timer_off(id, light):
     db = DbClass()
