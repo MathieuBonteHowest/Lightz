@@ -1,21 +1,21 @@
-from flask import Flask, render_template, redirect, url_for, request, session, flash
+from flask import Flask, render_template, redirect, url_for, request, session
 from functools import wraps
 from DbClass import DbClass
 import os
 import RPi.GPIO as GPIO
 from threading import Thread
 import threading
-from datetime import datetime, timedelta
+from datetime import datetime
 import time
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
-pinList = [40, 38, 37, 36, 35, 33, 32, 31]
-db = DbClass()
-status = db.getStatus()
-statusList = list(sum(status, ()))
-
 def application():
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setwarnings(False)
+    pinList = [40, 38, 37, 36, 35, 33, 32, 31]
+    db = DbClass()
+    status = db.getStatus()
+    statusList = list(sum(status, ()))
+
     for i in range (0,8):
         GPIO.setup(pinList[i], GPIO.OUT)
 
@@ -322,7 +322,7 @@ def periode_on(id, light, delay_einde):
     db =DbClass()
     GPIO.output(light, GPIO.LOW)
     db.updateStatus(id, 1)
-    threading.Timer(delay_einde, periode_off, args=(id, light,)).start()
+    threading.Timer(delay_einde, periode_off, args=(id, light,))
 
 def periode_off(id, light):
     db = DbClass()
@@ -332,11 +332,17 @@ def periode_off(id, light):
 def main():
     t1 = Thread(target=application)
     t2 = Thread(target=sensor)
+
+    t1.daemon = True
+    t2.daemon = True
     t1.start()
     t2.start()
     application().run(host=host, port=port, debug=True, use_reloader=False)
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 8080))
-    host = "0.0.0.0"
-    main()
+    try:
+        port = int(os.environ.get("PORT", 8080))
+        host = "0.0.0.0"
+        main()
+    except Exception as err:
+        print(err)

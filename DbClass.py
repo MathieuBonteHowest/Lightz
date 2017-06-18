@@ -32,8 +32,7 @@ class DbClass:
         db_hash_string = result[0]
         db_salt_string = result[1]
 
-
-        pwd_bytes = bytes(password, 'utf-8')
+        pwd_bytes = password
         db_salt_bytes = binascii.unhexlify(db_salt_string)
 
         hash_bytes = hashlib.pbkdf2_hmac('sha256', pwd_bytes, db_salt_bytes, 100000)
@@ -60,7 +59,7 @@ class DbClass:
             if result:
                 message = "Error: Deze gebruiker bestaat al"
             else:
-                pwd_bytes = bytes(password, 'utf-8')
+                pwd_bytes = password
                 salt_bytes = os.urandom(16)
                 hash_bytes = hashlib.pbkdf2_hmac('sha256', pwd_bytes, salt_bytes, 100000)
                 salt_string = binascii.hexlify(salt_bytes).decode('utf-8')
@@ -75,7 +74,7 @@ class DbClass:
 
                 message = "Succesvol geregistreerd"
         else:
-            message = "Foute code"
+            message = "Error: Foute code"
 
         return message
 
